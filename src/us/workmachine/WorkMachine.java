@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 public class WorkMachine extends Activity {
 
     private WebView webView;
@@ -24,4 +26,18 @@ public class WorkMachine extends Activity {
         webView.getSettings().setBuiltInZoomControls(false);
         webView.loadUrl("http://britishlibrary.workmachine.us");
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+    }
+
 }
