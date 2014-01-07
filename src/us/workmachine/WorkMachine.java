@@ -57,6 +57,25 @@ public class WorkMachine extends Activity {
         mShareActionProvider = (ShareActionProvider) item.getActionProvider();
         setShareIntent();
 
+        MenuItem feedbackItem = menu.findItem(R.id.menu_item_feedback);
+        feedbackItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+                /* Fill it with Data */
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"ykabhinav@gmail.com"});
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WorkMachine Feedback");
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Enter your feedback.");
+
+                /* Send it off to the Activity-Chooser */
+                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+                return true;
+            }
+        });
+
         // Return true to display menu
         return true;
     }
