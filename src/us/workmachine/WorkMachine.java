@@ -23,7 +23,7 @@ public class WorkMachine extends Activity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setBuiltInZoomControls(false);
+        webView.getSettings().setBuiltInZoomControls(true);
         webView.loadUrl("http://britishlibrary.workmachine.us");
     }
 
