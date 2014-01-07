@@ -55,15 +55,19 @@ public class WorkMachine extends Activity {
 
         // Fetch and store ShareActionProvider
         mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+        setShareIntent();
 
         // Return true to display menu
         return true;
     }
 
     // Call to update the share intent
-    private void setShareIntent(Intent shareIntent) {
-        if(mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
-        }
+    private void setShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Share WorkMachine");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Help the world with WorkMachine https://play.google.com/store/apps/details?id=us.workmachine");
+
+        mShareActionProvider.setShareIntent(shareIntent);
     }
 }
