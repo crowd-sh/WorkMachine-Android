@@ -40,7 +40,7 @@ public class WorkMachine extends Activity {
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setAllowFileAccess(true);
-//        webView.addJavascriptInterface(new WebAppInterface(this), "Android");
+        webView.addJavascriptInterface(new WebAppInterface(this), "Android");
         webView.loadUrl("http://workmachine.us/#/?app=1");
 
         ParseAnalytics.trackAppOpened(getIntent());
@@ -66,19 +66,24 @@ public class WorkMachine extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+        EasyTracker.getInstance(this).activityStart(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        MenuItem login = menu.findItem(R.id.menu_item_login);
+        if(ParseUser.getCurrentUser() != null) {
+            login.setEnabled(false);
+        }
 
         // Locate MenuItem with ShareActionProvider
         MenuItem item = menu.findItem(R.id.menu_item_share);
